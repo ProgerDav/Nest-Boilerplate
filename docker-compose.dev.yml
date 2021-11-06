@@ -1,0 +1,20 @@
+version: "3.2"
+services:
+  nest:
+    volumes:
+      - ./node_modules:/app/node_modules
+    command: sh -c 'yarn && yarn start:dev'
+
+  nginx:
+    environment:
+      - NGINX_SERVER_NAME=localhost
+      - NEST_HOST=nest
+      - NEST_PORT=3000
+      - NGINX_MAX_BODY=100M
+
+  db:
+    environment:
+      MYSQL_DATABASE: nest
+      MYSQL_USER: nest
+      MYSQL_PASSWORD: nest
+      MYSQL_ROOT_PASSWORD: root
